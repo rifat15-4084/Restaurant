@@ -37,6 +37,7 @@ export default function ReviewCard({ review }) {
           <p className="truncate text-sm font-bold text-mist">{review.name}</p>
           <p className="truncate text-xs text-haze">{review.role}</p>
         </div>
+        <span className="ml-auto shrink-0 text-[11px] text-haze">{review.date}</span>
       </figcaption>
     </figure>
   );

@@ -55,6 +55,14 @@ export default function Menu() {
   return (
     <section className="section-pad" aria-label="Menu">
       <div className="container-x">
+        {/* Chapter intro --------------------------------------------- */}
+        <p className="mb-8 max-w-3xl text-sm leading-relaxed text-haze sm:text-base">
+          Six chapters, revised with the seasons: produce arrives from Gazipur farms and the port
+          market every morning, our dough ferments for 48 hours, and the spice blends are ground at
+          5 AM. Vegetarian and vegan dishes are marked in every chapter, so you can browse with
+          confidence before the waiter arrives.
+        </p>
+
         {/* Category tabs --------------------------------------------- */}
         <div
           className="no-scrollbar -mx-5 flex gap-2 overflow-x-auto px-5 pb-1 sm:mx-0 sm:px-0"
@@ -172,6 +180,17 @@ export default function Menu() {
               </button>
             </div>
           )}
+        </div>
+
+        {/* Allergen & pricing note */}
+        <div className="mt-10 border-t border-white/5 pt-6 text-sm leading-relaxed text-haze">
+          <p>
+            Please tell your server about any allergies before ordering — the kitchen works with
+            nuts, dairy, gluten, sesame and shellfish daily, and although we take every care, we
+            cannot offer a fully allergen-free environment. All prices are in Bangladeshi Taka (৳)
+            and include applicable taxes; a service charge is added for tables of six or more.
+            Dishes and prices may shift a little with the seasons.
+          </p>
         </div>
       </div>
 

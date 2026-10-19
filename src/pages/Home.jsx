@@ -1,8 +1,9 @@
 import { useMemo } from 'react';
-import { ArrowRight, MessageCircle, Star } from 'lucide-react';
+import { ArrowRight, Clock, Coffee, Flame, Leaf, MessageCircle, Star } from 'lucide-react';
 import siteConfig from '../data/siteConfig';
-import { menuItems } from '../data/menu';
+import { menuItems, popularItems } from '../data/menu';
 import { reviews } from '../data/reviews';
+import { whyChooseUs } from '../data/values';
 import usePageTitle from '../hooks/usePageTitle';
 import Hero from '../components/Hero';
 import Stats from '../components/Stats';
@@ -15,6 +16,34 @@ import { formatPrice } from '../utils/format';
 const ABOUT_IMAGE =
   'https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80';
 
+const valueIcons = { flame: Flame, coffee: Coffee, clock: Clock, leaf: Leaf };
+
+/** Shared teaser card for the Featured and Popular dish rows. */
+function DishCard({ item }) {
+  return (
+    <article className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] transition-colors duration-200 hover:border-gold/30 hover:shadow-card">
+      <SmartImage
+        src={item.image}
+        alt={item.alt}
+        width={640}
+        height={400}
+        className="aspect-[16/10] w-full object-cover"
+      />
+      <div className="flex flex-col gap-2 p-5">
+        <div className="flex items-start justify-between gap-3">
+          <h3 className="min-w-0 flex-1 break-words text-lg font-bold leading-snug text-mist">
+            {item.name}
+          </h3>
+          <span className="shrink-0 text-lg font-bold text-gold tabular-nums">
+            {formatPrice(item.price)}
+          </span>
+        </div>
+        <p className="line-clamp-2 text-sm leading-relaxed text-haze">{item.description}</p>
+      </div>
+    </article>
+  );
+}
+
 export default function Home() {
   usePageTitle('', siteConfig.description);
 
@@ -23,6 +52,9 @@ export default function Home() {
     const picks = menuItems.filter((item) => item.tags.includes('chef'));
     return (picks.length >= 3 ? picks : menuItems).slice(0, 3);
   }, []);
+
+  // Six most-ordered dishes (tagged 'popular' in the menu data).
+  const popular = useMemo(() => popularItems.slice(0, 6), []);
 
   const previewReviews = reviews.slice(0, 3);
 
@@ -49,31 +81,25 @@ export default function Home() {
 
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {featured.map((item) => (
-              <article
-                key={item.id}
-                className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] transition-colors duration-200 hover:border-gold/30 hover:shadow-card"
-              >
-                <SmartImage
-                  src={item.image}
-                  alt={item.alt}
-                  width={640}
-                  height={400}
-                  className="aspect-[16/10] w-full object-cover"
-                />
-                <div className="flex flex-col gap-2 p-5">
-                  <div className="flex items-start justify-between gap-3">
-                    <h3 className="min-w-0 flex-1 break-words text-lg font-bold leading-snug text-mist">
-                      {item.name}
-                    </h3>
-                    <span className="shrink-0 text-lg font-bold text-gold tabular-nums">
-                      {formatPrice(item.price)}
-                    </span>
-                  </div>
-                  <p className="line-clamp-2 text-sm leading-relaxed text-haze">
-                    {item.description}
-                  </p>
-                </div>
-              </article>
+              <DishCard key={item.id} item={item} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Popular dishes ------------------------------------------------ */}
+      <section className="section-pad" aria-labelledby="popular-heading">
+        <div className="container-x">
+          <SectionHeading
+            eyebrow="Most Ordered"
+            id="popular-heading"
+            title="Six plates guests come back for"
+            subtitle="What the room orders most — from the first edamame of the evening to the freakshake that ends it."
+          />
+
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {popular.map((item) => (
+              <DishCard key={item.id} item={item} />
             ))}
           </div>
         </div>
@@ -121,6 +147,38 @@ export default function Home() {
               Read our story
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Why choose us -------------------------------------------------- */}
+      <section className="section-pad" aria-labelledby="why-heading">
+        <div className="container-x">
+          <SectionHeading
+            eyebrow="Why Naba"
+            id="why-heading"
+            title="Four reasons the table fills up"
+            subtitle="A wood-fire kitchen, a serious coffee programme and hours that fit the whole day."
+          />
+
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {whyChooseUs.map((point) => {
+              const Icon = valueIcons[point.icon];
+              return (
+                <div
+                  key={point.id}
+                  className="rounded-2xl border border-white/10 bg-white/[0.03] p-6"
+                >
+                  {Icon ? (
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-gold/30 bg-gold/10">
+                      <Icon className="h-5 w-5 text-gold" aria-hidden="true" />
+                    </div>
+                  ) : null}
+                  <h3 className="mt-4 text-base font-bold leading-snug text-mist">{point.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-haze">{point.text}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

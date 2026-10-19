@@ -21,6 +21,13 @@ export default function Gallery() {
   return (
     <section className="section-pad" aria-label="Gallery">
       <div className="container-x">
+        {/* Intro */}
+        <p className="mb-8 max-w-2xl text-sm leading-relaxed text-haze sm:text-base">
+          The room after sunset, plates leaving the pass and evenings worth remembering — shot by
+          our team and our guests over the past year. Tap any photograph to see it full screen, or
+          filter the gallery by food, interior and events.
+        </p>
+
         <div className="flex flex-wrap gap-2" role="group" aria-label="Filter gallery by type">
           {galleryFilters.map((item) => {
             const active = item.id === filter;
