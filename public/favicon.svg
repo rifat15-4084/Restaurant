@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F7C866" />
+      <stop offset="0.55" stop-color="#F5B544" />
+      <stop offset="1" stop-color="#D99A28" />
+    </linearGradient>
+    <linearGradient id="steam" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#3DF0E0" stop-opacity="0.15" />
+      <stop offset="1" stop-color="#3DF0E0" stop-opacity="0.95" />
+    </linearGradient>
+    <radialGradient id="halo" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#3DF0E0" stop-opacity="0.30" />
+      <stop offset="1" stop-color="#3DF0E0" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Tile -->
+  <rect width="64" height="64" rx="15" fill="#0A0A0B" />
+  <rect x="0.75" y="0.75" width="62.5" height="62.5" rx="14.5" fill="none" stroke="#FFFFFF" stroke-opacity="0.12" stroke-width="1.5" />
+
+  <!-- Soft neon halo -->
+  <circle cx="30" cy="36" r="24" fill="url(#halo)" />
+
+  <!-- Steam wisps -->
+  <path d="M25.5 22.5c-3-3.2 3-5 0-8.5" fill="none" stroke="url(#steam)" stroke-width="2.1" stroke-linecap="round" />
+  <path d="M33.5 21.5c-3-3.6 3-5.6 0-9.5" fill="none" stroke="url(#steam)" stroke-width="2.1" stroke-linecap="round" />
+
+  <!-- Handle -->
+  <path d="M43.5 30h2.5a6.5 6.5 0 0 1 0 13H42.5" fill="none" stroke="url(#gold)" stroke-width="3.2" stroke-linecap="round" />
+
+  <!-- Cup body -->
+  <path d="M14 25.5h30l-1.8 11.2C41.4 43.6 36.3 48.5 30 48.5s-11.4-4.9-12.2-11.8L16 25.5z" fill="url(#gold)" />
+
+  <!-- Saucer -->
+  <path d="M13 53.5h38" stroke="url(#gold)" stroke-width="3.2" stroke-linecap="round" />
+
+  <!-- N monogram -->
+  <path d="M25 41.5v-11l10 11v-11" fill="none" stroke="#0A0A0B" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
