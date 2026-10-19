@@ -30,13 +30,14 @@ export const siteConfig = {
     { id: 'tiktok', label: 'TikTok', url: 'https://tiktok.com/@nabakitchendhaka' },
   ],
 
+  /** One entry per page — `path` must match a route in App.jsx. */
   navLinks: [
-    { id: 'home', label: 'Home' },
-    { id: 'menu', label: 'Menu' },
-    { id: 'gallery', label: 'Gallery' },
-    { id: 'about', label: 'About' },
-    { id: 'reviews', label: 'Reviews' },
-    { id: 'contact', label: 'Contact' },
+    { path: '/', label: 'Home' },
+    { path: '/menu', label: 'Menu' },
+    { path: '/gallery', label: 'Gallery' },
+    { path: '/about', label: 'About' },
+    { path: '/reviews', label: 'Reviews' },
+    { path: '/contact', label: 'Contact' },
   ],
 
   /**

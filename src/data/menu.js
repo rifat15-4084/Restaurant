@@ -29,7 +29,7 @@ export const badgeMeta = {
   veg: { label: 'Veg', className: 'bg-emerald-400/10 text-emerald-300 border-emerald-400/30' },
   vegan: { label: 'Vegan', className: 'bg-emerald-400/10 text-emerald-300 border-emerald-400/30' },
   chef: { label: "Chef's Pick", className: 'bg-gold/15 text-gold border-gold/40' },
-  new: { label: 'New', className: 'bg-neon/10 text-neon border-neon/30' },
+  new: { label: 'New', className: 'border-sky-400/30 bg-sky-400/10 text-sky-300' },
 };
 
 export const menuItems = [

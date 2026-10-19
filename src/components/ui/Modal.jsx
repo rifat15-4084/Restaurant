@@ -9,8 +9,8 @@ const FOCUSABLE =
 
 /**
  * Accessible dialog: focus trap, Esc to close, click-outside to close,
- * body scroll lock and focus restoration. `position` is 'center' or 'right'
- * (used by the cart drawer).
+ * body scroll lock and focus restoration. The only animation in the app:
+ * a short opacity/transform transition (0.25s) on open and close.
  */
 export default function Modal({
   open,
@@ -106,7 +106,7 @@ export default function Modal({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
+            transition={{ duration: 0.2 }}
             onClick={() => onCloseRef.current?.()}
             aria-hidden="true"
           />
@@ -120,20 +120,20 @@ export default function Modal({
             className={cn(
               'relative flex flex-col outline-none',
               isDrawer
-                ? 'h-full w-full max-w-md border-l border-white/10 bg-charcoal/95 backdrop-blur-2xl'
-                : 'glass max-h-[92vh] w-full max-w-3xl overflow-hidden rounded-3xl bg-charcoal/90',
+                ? 'h-full w-full max-w-md border-l border-white/10 bg-charcoal'
+                : 'max-h-[92vh] w-full max-w-3xl overflow-hidden rounded-2xl border border-white/10 bg-charcoal',
               panelClassName
             )}
-            initial={isDrawer ? { x: '100%' } : { opacity: 0, y: 26, scale: 0.97 }}
-            animate={isDrawer ? { x: 0 } : { opacity: 1, y: 0, scale: 1 }}
-            exit={isDrawer ? { x: '100%' } : { opacity: 0, y: 18, scale: 0.98 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 32, mass: 0.7 }}
+            initial={isDrawer ? { x: '100%' } : { opacity: 0, y: 12 }}
+            animate={isDrawer ? { x: 0 } : { opacity: 1, y: 0 }}
+            exit={isDrawer ? { x: '100%' } : { opacity: 0, y: 8 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
           >
             <button
               type="button"
               onClick={() => onCloseRef.current?.()}
               aria-label={closeLabel}
-              className="absolute right-4 top-4 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-ink/70 text-haze backdrop-blur transition-colors hover:border-gold/40 hover:text-mist"
+              className="absolute right-4 top-4 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-ink/70 text-haze transition-colors duration-200 hover:border-gold/40 hover:text-mist"
             >
               <X className="h-5 w-5" aria-hidden="true" />
             </button>

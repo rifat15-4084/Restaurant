@@ -1,12 +1,11 @@
 import { useEffect } from 'react';
-import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Modal from './ui/Modal';
 import SmartImage from './ui/SmartImage';
 
 /**
- * Fullscreen lightbox: Esc / ← → keyboard control, swipe on touch,
- * image counter and focus management (via Modal's focus trap).
+ * Fullscreen lightbox: Esc / ← → keyboard control and focus management
+ * (via Modal's focus trap). No drag/swipe animation.
  */
 export default function Lightbox({ images, index, onIndexChange, onClose }) {
   const open = images.length > 0 && index >= 0 && index < images.length;
@@ -43,34 +42,19 @@ export default function Lightbox({ images, index, onIndexChange, onClose }) {
     >
       {image ? (
         <div className="flex flex-col gap-3">
-          <motion.div
-            key={image.id}
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            drag={images.length > 1 ? 'x' : false}
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={0.18}
-            onDragEnd={(_, info) => {
-              if (info.offset.x < -60 || info.velocity.x < -400) go(1);
-              else if (info.offset.x > 60 || info.velocity.x > 400) go(-1);
-            }}
-            className="overflow-hidden rounded-2xl"
-          >
+          <div key={image.id} className="overflow-hidden rounded-2xl">
             <SmartImage
               src={image.src}
               alt={image.alt}
               eager
               className="max-h-[70vh] w-full object-contain"
             />
-          </motion.div>
+          </div>
 
           <div className="flex items-center justify-between gap-4 px-1">
             <div className="min-w-0">
               <p className="truncate text-sm font-medium text-mist">{image.caption}</p>
-              <p className="mt-0.5 text-xs uppercase tracking-[0.2em] text-haze">
-                {image.category}
-              </p>
+              <p className="mt-1 text-xs uppercase tracking-[0.2em] text-haze">{image.category}</p>
             </div>
 
             <div className="flex shrink-0 items-center gap-2">
@@ -78,7 +62,7 @@ export default function Lightbox({ images, index, onIndexChange, onClose }) {
                 type="button"
                 onClick={() => go(-1)}
                 aria-label="Previous image"
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-mist transition-colors hover:border-gold/50 hover:text-gold"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-mist transition-colors duration-200 hover:border-gold/50 hover:text-gold"
               >
                 <ChevronLeft className="h-5 w-5" aria-hidden="true" />
               </button>
@@ -89,7 +73,7 @@ export default function Lightbox({ images, index, onIndexChange, onClose }) {
                 type="button"
                 onClick={() => go(1)}
                 aria-label="Next image"
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-mist transition-colors hover:border-gold/50 hover:text-gold"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-mist transition-colors duration-200 hover:border-gold/50 hover:text-gold"
               >
                 <ChevronRight className="h-5 w-5" aria-hidden="true" />
               </button>

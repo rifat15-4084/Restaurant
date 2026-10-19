@@ -1,7 +1,7 @@
+import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Mail, MapPin, Phone } from 'lucide-react';
 import siteConfig, { hoursSummary } from '../data/siteConfig';
-import { scrollToId } from '../utils/scroll';
-import GlowButton from './ui/GlowButton';
+import Button from './ui/Button';
 import { TikTokIcon } from './ui/Icons';
 
 const socialIcons = {
@@ -13,30 +13,18 @@ const socialIcons = {
 export default function Footer() {
   const year = new Date().getFullYear();
 
-  const handleNav = (id) => {
-    scrollToId(id);
-  };
-
   return (
-    <footer className="relative border-t border-white/10 bg-charcoal/50">
+    <footer className="border-t border-white/10 bg-charcoal/50">
       <div className="container-x px-5 py-16 sm:px-8">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1.2fr]">
           {/* Brand */}
           <div>
-            <button
-              type="button"
-              onClick={() => handleNav('home')}
-              className="flex items-center gap-3"
-              aria-label={`${siteConfig.name} — back to top`}
-            >
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="absolute inline-flex h-full w-full animate-pulse-glow rounded-full bg-neon" />
-                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-neon" />
-              </span>
-              <span className="font-display text-2xl font-extrabold tracking-[0.22em] text-mist">
+            <Link to="/" className="flex items-center gap-3" aria-label={`${siteConfig.name} — home`}>
+              <span className="h-2.5 w-2.5 rounded-full bg-gold" aria-hidden="true" />
+              <span className="font-display text-2xl font-bold tracking-[0.22em] text-mist">
                 NABA
               </span>
-            </button>
+            </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-haze">{siteConfig.description}</p>
 
             <div className="mt-6 flex items-center gap-3">
@@ -49,7 +37,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`Follow ${siteConfig.shortName} on ${social.label}`}
-                    className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-haze transition-all duration-300 hover:border-gold/40 hover:text-gold hover:shadow-glow"
+                    className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-haze transition-colors duration-200 hover:border-gold/40 hover:text-gold"
                   >
                     <Icon className="h-[18px] w-[18px]" aria-hidden="true" />
                   </a>
@@ -65,24 +53,22 @@ export default function Footer() {
             </h2>
             <ul className="space-y-3">
               {siteConfig.navLinks.map((link) => (
-                <li key={link.id}>
-                  <button
-                    type="button"
-                    onClick={() => handleNav(link.id)}
-                    className="text-sm text-haze transition-colors hover:text-mist"
+                <li key={link.path}>
+                  <Link
+                    to={link.path}
+                    className="text-sm text-haze transition-colors duration-200 hover:text-mist"
                   >
                     {link.label}
-                  </button>
+                  </Link>
                 </li>
               ))}
               <li>
-                <button
-                  type="button"
-                  onClick={() => handleNav('reservation')}
-                  className="text-sm font-semibold text-gold transition-colors hover:text-gold-soft"
+                <Link
+                  to="/reservation"
+                  className="text-sm font-semibold text-gold transition-colors duration-200 hover:text-gold-soft"
                 >
                   Reserve a Table
-                </button>
+                </Link>
               </li>
             </ul>
           </nav>
@@ -99,13 +85,13 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-4 w-4 shrink-0 text-gold" aria-hidden="true" />
-                <a href={`tel:${siteConfig.phoneHref}`} className="transition-colors hover:text-mist">
+                <a href={`tel:${siteConfig.phoneHref}`} className="transition-colors duration-200 hover:text-mist">
                   {siteConfig.phone}
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-4 w-4 shrink-0 text-gold" aria-hidden="true" />
-                <a href={`mailto:${siteConfig.email}`} className="transition-colors hover:text-mist">
+                <a href={`mailto:${siteConfig.email}`} className="transition-colors duration-200 hover:text-mist">
                   {siteConfig.email}
                 </a>
               </li>
@@ -115,9 +101,9 @@ export default function Footer() {
               {hoursSummary}
             </p>
 
-            <GlowButton to="reservation" className="mt-6">
+            <Button to="/reservation" className="mt-6">
               Reserve a Table
-            </GlowButton>
+            </Button>
           </div>
         </div>
 

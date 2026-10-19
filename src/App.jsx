@@ -1,66 +1,35 @@
-import { lazy, Suspense } from 'react';
-import { MotionConfig } from 'framer-motion';
+import { lazy } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './hooks/useCart';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Stats from './components/Stats';
-import CartDrawer from './components/CartDrawer';
-import BackgroundOrbs from './components/ui/BackgroundOrbs';
-import CursorGlow from './components/ui/CursorGlow';
+import Layout from './components/Layout';
 
-// Heavy below-the-fold sections load lazily to keep the first paint fast.
-const Menu = lazy(() => import('./components/Menu'));
-const About = lazy(() => import('./components/About'));
-const Gallery = lazy(() => import('./components/Gallery'));
-const Reservation = lazy(() => import('./components/Reservation'));
-const Testimonials = lazy(() => import('./components/Testimonials'));
-const Location = lazy(() => import('./components/Location'));
-const Footer = lazy(() => import('./components/Footer'));
-
-function SectionFallback() {
-  return (
-    <div className="flex min-h-[45vh] items-center justify-center" aria-hidden="true">
-      <span className="h-10 w-10 animate-spin rounded-full border-2 border-white/10 border-t-gold" />
-    </div>
-  );
-}
+// Each page is code-split and lazy-loaded; Layout wraps them in Suspense.
+const Home = lazy(() => import('./pages/Home'));
+const MenuPage = lazy(() => import('./pages/MenuPage'));
+const GalleryPage = lazy(() => import('./pages/GalleryPage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const ReviewsPage = lazy(() => import('./pages/ReviewsPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+const ReservationPage = lazy(() => import('./pages/ReservationPage'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 export default function App() {
   return (
-    <MotionConfig reducedMotion="user">
+    <BrowserRouter>
       <CartProvider>
-        <a
-          href="#menu"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-full focus:bg-gold focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-ink"
-        >
-          Skip to menu
-        </a>
-
-        <BackgroundOrbs />
-        <CursorGlow />
-
-        <Navbar />
-
-        <main>
-          <Hero />
-          <Stats />
-
-          <Suspense fallback={<SectionFallback />}>
-            <Menu />
-            <About />
-            <Gallery />
-            <Reservation />
-            <Testimonials />
-            <Location />
-          </Suspense>
-        </main>
-
-        <Suspense fallback={null}>
-          <Footer />
-        </Suspense>
-
-        <CartDrawer />
+        <Routes>
+          <Route element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="/menu" element={<MenuPage />} />
+            <Route path="/gallery" element={<GalleryPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/reviews" element={<ReviewsPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/reservation" element={<ReservationPage />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
       </CartProvider>
-    </MotionConfig>
+    </BrowserRouter>
   );
 }

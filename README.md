@@ -1,13 +1,26 @@
 # Naba Kitchen & Café — Website
 
-A complete, production-ready single-page website for **Naba Kitchen & Café** (Gulshan, Dhaka):
-modern fusion food, specialty coffee and brunch, presented with a dark, cinematic and futuristic
+A complete, production-ready **multi-page** website for **Naba Kitchen & Café** (Gulshan, Dhaka):
+modern fusion food, specialty coffee and brunch, presented in a dark, formal and premium
 interface.
 
-**Stack:** Vite · React 18 (JavaScript, functional components + hooks) · Tailwind CSS 3.4 ·
-Framer Motion · lucide-react. No router, no backend, no database, no paid APIs — everything runs
-fully on the frontend. The only network calls are the free **Web3Forms** reservation form and
-Google Maps (key-less embed).
+**Stack:** Vite · React 18 (JavaScript, functional components + hooks) · React Router v6
+(`BrowserRouter`) · Tailwind CSS 3.4 · Framer Motion (modal/drawer transitions only) ·
+lucide-react. No backend, no database, no paid APIs — everything runs fully on the frontend. The
+only network calls are the free **Web3Forms** reservation form and Google Maps (key-less embed).
+
+### Pages
+
+| Route | Page | Contents |
+| --- | --- | --- |
+| `/` | Home | Short hero, stats, 3 featured dishes, story teaser, 3 reviews, reservation CTA |
+| `/menu` | Menu | Category tabs, search, filter chips, item modal, cart drawer |
+| `/gallery` | Gallery | Filterable image grid + keyboard lightbox |
+| `/about` | About | Full story, feature points, chef signature |
+| `/reviews` | Reviews | All guest reviews in a simple grid (no carousel) |
+| `/contact` | Contact | Address, phone, email, opening hours, embedded map |
+| `/reservation` | Reservation | Web3Forms reservation form + WhatsApp booking |
+| any unknown URL | 404 | Friendly "page not found" |
 
 ---
 
@@ -95,19 +108,29 @@ generated automatically from `siteConfig.hours`, so updating that array updates 
 
 ```
 src/
-  components/        Navbar, Hero, Stats, Menu, MenuCard, MenuModal, CartDrawer,
-                     About, Gallery, Lightbox, Reservation, Testimonials,
-                     Location, Footer and ui/* (buttons, modals, reveals…)
+  pages/             Home, MenuPage, GalleryPage, AboutPage, ReviewsPage,
+                     ContactPage, ReservationPage, NotFound
+  components/        Layout (Navbar + Footer + CartDrawer shell), Navbar, Footer,
+                     PageHeader, ScrollToTop, Hero, Stats, Menu, MenuCard, MenuModal,
+                     CartDrawer, About, Gallery, Lightbox, ReviewCard, Reservation,
+                     Location and ui/* (Button, Modal, SectionHeading, SmartImage)
   data/              menu.js, gallery.js, reviews.js, siteConfig.js
-  hooks/             useScrollSpy, useOpenStatus, useLocalStorage, useCart
-  utils/             formatting, validation, smooth-scroll helpers
-  App.jsx            section layout + lazy loading
+  hooks/             useCart, useOpenStatus, useLocalStorage, usePageTitle
+  utils/             formatting, validation, cn
+  App.jsx            BrowserRouter + routes (pages lazy-loaded via React.lazy)
   main.jsx           entry point
-  index.css          design tokens, glass system, grain overlay
+  index.css          design tokens, formal dark theme, spacing system
 public/              favicon.svg, og-image.jpg
+vercel.json          SPA rewrite — refreshing /menu etc. never returns 404
 ```
 
 ## 7. Notes
+
+- Routes are lazy-loaded (`React.lazy` + `Suspense`) and every navigation scrolls to the top
+  (`ScrollToTop`) with a simple 0.3s opacity fade.
+- The navbar uses `<NavLink>` active states; every "Reserve a Table" button links to
+  `/reservation`.
+- `vercel.json` contains the SPA rewrite, so deep links refresh correctly in production.
 
 - The order tray (cart) persists in the visitor's `localStorage` — no account or backend needed.
 - All animations respect `prefers-reduced-motion`.
