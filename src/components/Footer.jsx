@@ -15,7 +15,8 @@ export default function Footer() {
 
   return (
     <footer className="border-t border-white/10 bg-charcoal/50">
-      <div className="container-x px-5 py-16 sm:px-8">
+      <div className="px-5 py-16 sm:px-8">
+        <div className="container-x">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1.2fr]">
           {/* Brand */}
           <div>
@@ -111,13 +112,25 @@ export default function Footer() {
           <p>
             © {year} {siteConfig.name}. All rights reserved.
           </p>
-          <p className="flex items-center gap-2">
-            Crafted with
-            <span className="text-gold" aria-hidden="true">
-              ✦
-            </span>
-            in Gulshan, Dhaka
+          <p className="group flex items-center gap-2">
+            Made by
+            <a
+              href="https://md-rifat-hasan.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="credit-link"
+              aria-label="Portfolio of Md Rifat Hasan (opens in a new tab)"
+            >
+              <span
+                className="mr-1.5 inline-block text-[0.85em] text-gold animate-credit-spark"
+                aria-hidden="true"
+              >
+                ✦
+              </span>
+              Md Rifat Hasan
+            </a>
           </p>
+        </div>
         </div>
       </div>
     </footer>

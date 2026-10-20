@@ -7,7 +7,8 @@ import siteConfig from '../data/siteConfig';
 export default function PageHeader({ title, subtitle }) {
   return (
     <header className="border-b border-white/5 bg-charcoal/40">
-      <div className="container-x px-5 py-14 sm:px-8 md:py-16">
+      <div className="px-5 py-14 sm:px-8 md:py-16">
+        <div className="container-x">
         <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-gold">
           {siteConfig.shortName} Kitchen &amp; Café
         </p>
@@ -17,6 +18,7 @@ export default function PageHeader({ title, subtitle }) {
         {subtitle ? (
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-haze">{subtitle}</p>
         ) : null}
+        </div>
       </div>
     </header>
   );

@@ -28,10 +28,8 @@ export default function Navbar() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-ink/90 backdrop-blur-md">
-      <nav
-        aria-label="Main navigation"
-        className="container-x flex h-[72px] items-center justify-between gap-4 px-5 sm:px-8"
-      >
+      <nav aria-label="Main navigation" className="px-5 sm:px-8">
+        <div className="container-x flex h-[72px] items-center justify-between gap-4">
         {/* Wordmark */}
         <Link to="/" className="flex items-center gap-3" aria-label={`${siteConfig.name} — home`}>
           <span className="h-2.5 w-2.5 rounded-full bg-gold" aria-hidden="true" />
@@ -92,41 +90,44 @@ export default function Navbar() {
             )}
           </button>
         </div>
+        </div>
       </nav>
 
       {/* Mobile menu panel */}
       {menuOpen ? (
         <div id="mobile-menu" className="border-t border-white/10 bg-ink lg:hidden">
-          <div className="container-x px-5 py-6 sm:px-8">
-            <ul className="flex flex-col">
-              {siteConfig.navLinks.map((link) => (
-                <li key={link.path} className="border-b border-white/5">
-                  <NavLink
-                    to={link.path}
-                    end={link.path === '/'}
-                    className={({ isActive }) =>
-                      cn(
-                        'flex min-h-[48px] items-center py-3 text-base font-medium transition-colors duration-200',
-                        isActive ? 'text-gold' : 'text-mist hover:text-gold'
-                      )
-                    }
-                  >
-                    {link.label}
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
+          <div className="px-5 py-6 sm:px-8">
+            <div className="container-x">
+              <ul className="flex flex-col">
+                {siteConfig.navLinks.map((link) => (
+                  <li key={link.path} className="border-b border-white/5">
+                    <NavLink
+                      to={link.path}
+                      end={link.path === '/'}
+                      className={({ isActive }) =>
+                        cn(
+                          'flex min-h-[48px] items-center py-3 text-base font-medium transition-colors duration-200',
+                          isActive ? 'text-gold' : 'text-mist hover:text-gold'
+                        )
+                      }
+                    >
+                      {link.label}
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
 
-            <div className="mt-6 flex flex-col gap-3">
-              <Button to="/reservation" className="w-full">
-                Reserve a Table
-              </Button>
-              <a
-                href={`tel:${siteConfig.phoneHref}`}
-                className="flex min-h-[48px] items-center justify-center rounded-full border border-white/10 bg-white/5 text-sm font-medium text-haze transition-colors duration-200 hover:text-mist"
-              >
-                {siteConfig.phone}
-              </a>
+              <div className="mt-6 flex flex-col gap-3">
+                <Button to="/reservation" className="w-full">
+                  Reserve a Table
+                </Button>
+                <a
+                  href={`tel:${siteConfig.phoneHref}`}
+                  className="flex min-h-[48px] items-center justify-center rounded-full border border-white/10 bg-white/5 text-sm font-medium text-haze transition-colors duration-200 hover:text-mist"
+                >
+                  {siteConfig.phone}
+                </a>
+              </div>
             </div>
           </div>
         </div>

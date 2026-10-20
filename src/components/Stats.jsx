@@ -8,7 +8,8 @@ function formatStat(value) {
 export default function Stats() {
   return (
     <section aria-label="Naba by the numbers" className="border-y border-white/5 bg-charcoal/40">
-      <div className="container-x px-5 sm:px-8">
+      <div className="px-5 sm:px-8">
+        <div className="container-x">
         <ul className="grid grid-cols-2 lg:grid-cols-4 lg:divide-x lg:divide-white/5">
           {siteConfig.stats.map((stat) => (
             <li
@@ -25,6 +26,7 @@ export default function Stats() {
             </li>
           ))}
         </ul>
+        </div>
       </div>
     </section>
   );

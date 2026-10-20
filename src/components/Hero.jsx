@@ -37,7 +37,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative flex min-h-[calc(100svh-72px)] items-center overflow-hidden py-20"
+      className="relative flex min-h-[calc(100svh-72px)] items-center overflow-hidden"
       aria-label="Welcome to Naba Kitchen and Café"
     >
       {/* Background */}
@@ -53,45 +53,47 @@ export default function Hero() {
         <div className="absolute inset-0 bg-ink/75" />
       </div>
 
-      <div className="container-x px-5 sm:px-8">
-        <div className="max-w-3xl">
-          <p className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[11px] font-medium uppercase tracking-[0.24em] text-haze">
-            Gulshan · Dhaka — {siteConfig.cuisine}
-          </p>
+      <div className="relative z-10 w-full px-5 py-20 sm:px-8">
+        <div className="container-x">
+          <div className="max-w-3xl">
+            <p className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[11px] font-medium uppercase tracking-[0.24em] text-haze">
+              Gulshan · Dhaka — {siteConfig.cuisine}
+            </p>
 
-          <h1 className="text-4xl font-bold leading-[1.15] text-mist sm:text-5xl md:text-6xl">
-            Taste the <span className="text-gold">Future</span> of Dining
-          </h1>
+            <h1 className="text-4xl font-bold leading-[1.15] text-mist sm:text-5xl md:text-6xl">
+              Taste the <span className="text-gold">Future</span> of Dining
+            </h1>
 
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-haze sm:text-lg">
-            Modern fusion plates, specialty coffee and slow mornings — served in a refined
-            dining room where warm brass meets soft light. Book a table, or build your order
-            and show it to your waiter.
-          </p>
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-haze sm:text-lg">
+              Modern fusion plates, specialty coffee and slow mornings — served in a refined
+              dining room where warm brass meets soft light. Book a table, or build your order
+              and show it to your waiter.
+            </p>
 
-          <div className="mt-8 flex flex-wrap gap-4">
-            <Button to="/reservation">Reserve a Table</Button>
-            <Button to="/menu" variant="ghost">
-              Explore Menu
-            </Button>
-          </div>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <Button to="/reservation">Reserve a Table</Button>
+              <Button to="/menu" variant="ghost">
+                Explore Menu
+              </Button>
+            </div>
 
-          <div className="mt-12 flex flex-col gap-4 sm:flex-row sm:gap-4">
-            <InfoCard
-              open={isOpen}
-              label={isOpen ? 'Open Now' : 'Currently Closed'}
-              value={nextChange}
-            />
-            <InfoCard
-              icon={<Star className="h-3.5 w-3.5 fill-current" />}
-              label="Guest Rating"
-              value={`${siteConfig.rating} ★ · ${siteConfig.reviewCount} reviews`}
-            />
-            <InfoCard
-              icon={<Wifi className="h-3.5 w-3.5" />}
-              label="For Guests"
-              value={siteConfig.wifi}
-            />
+            <div className="mt-12 flex flex-col gap-4 sm:flex-row sm:gap-4">
+              <InfoCard
+                open={isOpen}
+                label={isOpen ? 'Open Now' : 'Currently Closed'}
+                value={nextChange}
+              />
+              <InfoCard
+                icon={<Star className="h-3.5 w-3.5 fill-current" />}
+                label="Guest Rating"
+                value={`${siteConfig.rating} ★ · ${siteConfig.reviewCount} reviews`}
+              />
+              <InfoCard
+                icon={<Wifi className="h-3.5 w-3.5" />}
+                label="For Guests"
+                value={siteConfig.wifi}
+              />
+            </div>
           </div>
         </div>
       </div>
